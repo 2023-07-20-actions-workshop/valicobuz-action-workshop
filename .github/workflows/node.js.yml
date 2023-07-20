@@ -46,6 +46,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+#-------------define and read output-----------------------
+      - name: Define Output
+        id: test
+        run: echo 'execute=false' >> $GITHUB_OUTPUT
+        
+      - name: Access Ouput
+        if: ${{ steps.test.outputs.execute == 'true' }}
+        run: echo ${{ steps.test.outputs.day }}
+#------------------------------------------------------------
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
